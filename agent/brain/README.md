@@ -6,3 +6,4 @@
 | Файл | Что в нём |
 |---|---|
  brain.py | загружает библиотеку ядра через ctypes, вызывает core_get_info и печатает сообщение agent_started в JSON |
+| core_procs.c | функция core_list_procs: список процессов (pid, ppid, имя) |
