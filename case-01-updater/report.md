@@ -78,6 +78,3 @@ python3 updater.py --installed installed --rollback
 
 ![Откат](screenshots/05_rollback.png)
 
-## Лог обновления
-
-Вставьте сюда содержимое `installed/update.log`.
