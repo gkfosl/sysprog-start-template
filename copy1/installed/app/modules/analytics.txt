@@ -1,0 +1,1 @@
+New analytics module in version 1.5

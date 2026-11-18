@@ -1,0 +1,3 @@
+2026-11-16 14:14:11 план: добавить ['modules/analytics.txt'], заменить ['config.json', 'main.py', 'modules/catalog.txt', 'modules/engine.bin', 'modules/orders.txt'], удалить ['modules/legacy.txt']
+2026-11-16 14:14:11 обновление успешно. main.py вывод: Корпоративное приложение: версия 1.5 | Список модулей: ['analytics.txt', 'catalog.txt', 'orders.txt']
+2026-11-16 14:17:10 уже актуально: изменений нет

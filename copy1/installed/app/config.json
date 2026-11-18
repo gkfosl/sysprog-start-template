@@ -1,0 +1,6 @@
+{
+  "app": "SalesDesk",
+  "version": "1.5",
+  "database": "local",
+  "backup_before_upgrade": true
+}
