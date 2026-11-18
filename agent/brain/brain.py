@@ -55,6 +55,9 @@ core.core_wait.restype = ctypes.c_int
 core.core_proc_cpu.argtypes = [ctypes.c_int64, ctypes.POINTER(CoreCpu)]
 core.core_proc_cpu.restype = ctypes.c_int
 
+core.core_proc_threads.argtypes = [ctypes.c_int64, ctypes.POINTER(ctypes.c_int32)]
+core.core_proc_threads.restype = ctypes.c_int
+
 TOO_SMALL = 122 if sys.platform == "win32" else errno.ERANGE
 
 
@@ -134,6 +137,20 @@ def cpu_load(interval=1.0):
             load.append({"pid": p["pid"], "name": p["name"], "cpu": round((b - a) * 100 / wall_us)})
     return sorted(load, key=lambda x: x["cpu"], reverse=True)
 
+def proc_threads(pid):
+    count = ctypes.c_int32()
+    if core.core_proc_threads(pid, ctypes.byref(count)) != 0:
+        return None
+    return count.value
+
+def most_threads(n=3):
+    found = []
+    for p in list_procs():
+        count = proc_threads(p["pid"])
+        if count is not None:
+            found.append({"pid": p["pid"], "name": p["name"], "threads": count})
+    return sorted(found, key=lambda x: x["threads"], reverse=True)[:n]
+
 def send(message, url):
     data = json.dumps(message, ensure_ascii=False).encode("utf-8")
     request = urllib.request.Request(url, data=data, method="POST",
@@ -145,11 +162,14 @@ def send(message, url):
 
 
 if __name__ == "__main__":
-    child = spawn([sys.executable, "-c", "import time\nend = time.time() + 3\nwhile time.time() < end: pass"])
-    top = cpu_load(1.0)[:3]
-    wait(child, 5000)
+    child = spawn([sys.executable, "-c", "import threading, time\n"
+                   "ts = [threading.Thread(target=time.sleep, args=(3,)) for _ in range(4)]\n"
+                   "for t in ts: t.start()\n"
+                   "for t in ts: t.join()"])
+    time.sleep(1)
     message = {"event": "agent_started", "os": sys.platform, **get_info(),
-               "child": child.pid, "top": top}
+               "child": child.pid, "child_threads": proc_threads(child.pid), "most_threads": most_threads(3)}
+    wait(child, 5000)
     print(json.dumps(message, ensure_ascii=False, indent=2))
     if len(sys.argv) > 1:
         status, body = send(message, sys.argv[1])
