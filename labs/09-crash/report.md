@@ -4,20 +4,19 @@
 Компилятор: ___
 
 ## Падение
-crash null: что напечатано и код завершения: ___
-ctypes_crash.py: что напечатал Python: ___
-Где система записала падение: ___
+crash null: что напечатано и код завершения: 139
+ctypes_crash.py: что напечатал Python: `writing 8 bytes to address 0`, `Fatal Python error: Segmentation fault`
+Где система записала падение: `~/Library/Logs/DiagnosticReports/crash-*`
 
 ## Молчаливые ошибки
-crash overflow: limit до и после, код: ___
-crash heap без проверки: ___
-AddressSanitizer для heap: вид ошибки и строка: ___
-AddressSanitizer для uaf: вид ошибки и две строки: ___
+crash overflow: limit до и после, код: limit before: 100, limit after: 7 
+crash heap без проверки: `wrote 5 numbers into room for 4`
+AddressSanitizer для heap: вид ошибки и строка: `heap-buffer-overflow`, `crash.c:24`
+AddressSanitizer для uaf: вид ошибки и две строки: `heap-use-after-free`, `crash.c:33` после , `crash.c:32` 
 
 ## Исправление
-Что изменено и что напечатала исправленная программа: ___
-
-Не получилось: ___
+Что изменено и что напечатала исправленная программа: в циклах `i <= 4` заменено на `i < 4` (строки 15 и 23); `./crash_fixed heap` -> `wrote 4 numbers into room for 4`; `./crash_fixed overflow` -> `limit before: 100`, `limit after:  100`
+Не получилось: Мне не вывелся тут код (crash overflow )
 
 ## Снимки экрана
 
