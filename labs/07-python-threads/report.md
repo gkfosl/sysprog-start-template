@@ -1,7 +1,6 @@
 # ЛР 7. Потоки Python и GIL
 
 Система: 
-Система: 
 ProductName:		macOS
 ProductVersion:		27.0.1
 BuildVersion:		26A434
