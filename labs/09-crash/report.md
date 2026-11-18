@@ -1,7 +1,13 @@
 # ЛР 9. Разбор падения
 
-Система: ___
-Компилятор: ___
+Система: 
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+Компилятор: 
+Apple clang version 21.0.0 (clang-2100.0.123.102)
+Target: arm64-apple-darwin27.0.0
+Thread model: posix
 
 ## Падение
 crash null: что напечатано и код завершения: 139
