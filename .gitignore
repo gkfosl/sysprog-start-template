@@ -24,7 +24,3 @@ Thumbs.db
 .vscode/
 # настройки отладки лабораторных сдаются вместе с работой (ЛР 2)
 !labs/*/.vscode/
-agent/cpu_top
-agent/core/core
-agent/core/count_threads
-agent/core/cpu_top
